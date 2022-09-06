@@ -2,6 +2,7 @@ const User = require('../models/userModel.js');
 const asyncHandler = require('express-async-handler');
 const generateToken = require('../utils/generateToken.js');
 const Config = require("../config/config");
+const client = require("twilio")(Config.accountSID, Config.authToken);
 
 //@desc     Auth User & Get Token
 //@route    POST api/users/login
@@ -10,7 +11,7 @@ exports.login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
-  if (user && (await user.matchPassword(password))) {
+  if (user && (await user.comparePassword(password))) {
     return res.json({
       _id: user._id,
       fullName: user.fullName,
@@ -124,3 +125,42 @@ exports.Verif=async(req,res) =>{
     }
   }); 
 };
+
+exports.findOne = (req,res)=>{
+  console.log(req.params.userId);
+  User.findOne({_id: req.params.userId})
+  .then(data =>{
+      res.status(200).json({ User:data });
+  })
+  .catch(err =>{
+      res
+      .status(500)
+      .json({
+       messag: err });
+  });
+};
+exports.deleteOne =async (req, res) => {
+
+  const user = await User.findOneAndDelete({_id:req.params.userId})
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message:" Maybe user was not found!"
+        });
+      } else {
+        res.send({
+          message: "user was deleted successfully!"
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err
+      });
+    });
+}
+
+
+
+
+

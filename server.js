@@ -1,28 +1,44 @@
 const express = require("express"),
 app = express();
+const path = require("path");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const connectDb = require('./db.js');
 const cors = require( 'cors');
 dotenv.config();
-let server = require('http').createServer(app);
-const io = require('socket.io')(server);  //for server connection
+let apps = require('express')();
+let http = require('http').Server(apps);
+let io = require('socket.io')(http);
 
-io.on('connection', (socket)=>{
-  console.log(socket);
 
-socket.on('disconnect',function(){
-io.emit('user-changes', {user: socket.username, event: 'left'});
-});
-socket.on('set-name', (name)=>{
-  console.timeLog('User name', name)
-  socket.username = name;
-  io.emit('user-changes' ,{name, event: 'jointed'});
-});
-socket.on('send-message',(message)=>{
-  io.emit('message', {user: socket.username, msg:message.text, created: new Date()});
-});
-}) 
+
+
+
+const allowedOrigins = [
+  'capacitor://localhost',
+  'ionic://localhost',
+  'http://localhost',
+  'http://localhost:3001',
+  'http://localhost:8200',
+];
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Origin not allowed by CORS'));
+    }
+  },
+};
+
+ // Enable preflight requests for all routes
+ app.options('*', cors(corsOptions));
+ app.use(function(req, res, next) {
+   res.header("Access-Control-Allow-Origin", "http://localhost:8200"); // update to match the domain you will make the request from
+   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+   next();
+ });
+
 
 
 const userRoutes = require( './routes/userRoutes.js');
@@ -43,6 +59,26 @@ app.get('/', (req, res) => {
   res.json({ message: 'Hello World' });
 });
 
+io.on('connection', (socket) => {
+  
+  socket.on('disconnect', function(){
+    io.emit('users-changed', {user: socket.nickname, event: 'left'});   
+  });
+
+  socket.on('set-nickname', (nickname) => {
+    socket.nickname = nickname;
+    io.emit('users-changed', {user: nickname, event: 'joined'});    
+  });
+  
+  socket.on('add-message', (message) => {
+    io.emit('message', {text: message.text, from: socket.nickname, created: new Date()});    
+  });
+});
+
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 const PORT = process.env.PORT;
 
 app.listen(PORT, () => console.log(`Server is Running on Port ${PORT}`));
