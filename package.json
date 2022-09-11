@@ -4,7 +4,9 @@
   "description": "apicamping",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "oumaymabriki",
   "license": "ISC",
@@ -22,6 +24,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.4",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.19",
     "path": "^0.12.7",
     "socket.io": "^4.5.2",
     "twilio": "^3.81.0"

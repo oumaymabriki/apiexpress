@@ -32,13 +32,13 @@ const corsOptions = {
 };
 
  // Enable preflight requests for all routes
- app.options('*', cors(corsOptions));
+ //app.options('*', cors(corsOptions));
  app.use(function(req, res, next) {
    res.header("Access-Control-Allow-Origin", "http://localhost:8200"); // update to match the domain you will make the request from
    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
    next();
  });
-
+ app.use(cors());
 
 
 const userRoutes = require( './routes/userRoutes.js');
@@ -49,7 +49,7 @@ connectDb();
 
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(cors());
+
 
 app.use('/api/users', userRoutes);
 app.use('api/centers',centerRoutes);
