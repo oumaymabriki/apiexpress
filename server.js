@@ -52,8 +52,8 @@ app.use(morgan('dev'));
 
 
 app.use('/api/users', userRoutes);
-app.use('api/centers',centerRoutes);
-app.use('api/comments', commentsRoutes);
+app.use('/api/centers',centerRoutes);
+app.use('/api/comments', commentsRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'Hello World' });

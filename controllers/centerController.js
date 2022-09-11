@@ -8,13 +8,7 @@ const asyncHandler = require('express-async-handler');
 //@access   isAdmin
 exports.register = asyncHandler(async (req, res) => {
     const { centername, longitude, latitude, description } = req.body;
-    const centerExist = await Center.findOne({ _id });
-  
-    if (centerExist) {
-      res.status(400);
-      throw new Error('Center already Exist');
-    }
-  
+
     const center = await Center.create({ centername, longitude, latitude, description});
   
     if (center) {

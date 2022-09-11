@@ -7,6 +7,7 @@ const centerSchema = new schema({
     latitude:Number,
     images:{required: false, type:String},
     description:String,
-    comments: [{type: schema.Types.ObjectId, ref: 'Comment' }]
+    //comments: [{type: schema.Types.ObjectId, ref: 'Comment' }]
 });
+
 module.exports = mongoose.model("Center", centerSchema);

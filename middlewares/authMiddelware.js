@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel.js');
 
 const protect = asyncHandler(async (req, res, next) => {
+  if (!req.headers.authorization) res.status(403).json({error: "Unauthorized"})
   let token = req.headers.authorization.split(' ')[1];
   if (!token) res.status(403).json({error: "Unauthorized"})
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -11,6 +12,7 @@ const protect = asyncHandler(async (req, res, next) => {
 });
 
 const admin = async (req, res, next) => {
+  if (!req.headers.authorization) res.status(403).json({error: "Unauthorized"})
   let token = req.headers.authorization.split(' ')[1];
   if (!token) res.status(403).json({error: "Forbidden"})
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
