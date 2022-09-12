@@ -127,10 +127,10 @@ exports.Verif=async(req,res) =>{
 };
 
 exports.findOne = (req,res)=>{
-  console.log(req.params.userId);
-  User.findOne({_id: req.params.userId})
+  console.log(req.params.id);
+  User.findOne({_id: req.params.id})
   .then(data =>{
-      res.status(200).json({ User:data });
+      res.status(200).json(data);
   })
   .catch(err =>{
       res

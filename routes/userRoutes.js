@@ -19,8 +19,8 @@ router.post('/register', register);
 router.post('/verif', Verif);
 router.post('/login', login);
 router.get('/',  getUsers); // protect, admin,
-router.put('/:id', protect, updateUserProfile);
-router.get('/:id', protect, findOne);
+router.put('/:id', updateUserProfile);
+router.get('/:id', findOne);
 router.delete('/:id', protect,admin, deleteOne);
 //reset password with sendGrid
 //Password RESET
