@@ -1,0 +1,429 @@
+{
+	"info": {
+		"_postman_id": "d3b3aa96-2271-4732-b1e8-15ec88dd70b4",
+		"name": "camping-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Get all users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWUxMzMwNzYyODUyODMzZTk3NjQzZCIsImlhdCI6MTY2MjkxNTQyMiwiZXhwIjoxNjY1NTA3NDIyfQ.Df1WaSsb62WT-OqkKhIDhQRPEdB__SR8UjinnopB3N8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWMxYzU3YjVlOTU5OWNiY2IxMmE2ZTQiLCJyb2xlIjoiYWRtaW4iLCJmdWxsTmFtZSI6IlNlbWFoIEtoYXNraG91c3NpIiwiaWF0IjoxNjQwMTcxNjMwfQ.miya_RP9TmZSqBk_pK71XM0_00Dl_Tjy3IonjqQHJj4",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "governorate",
+									"value": "ben arous",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "admin",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "khaskhoussi",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"fullName\": \"Oumaima Briki\",\n        \"email\": \"oumaima@email.com\",\n        \"password\": \"pass1234\",\n        \"isAdmin\": true,\n        \"phoneNumber\": 21655944780,\n        \"photo\": \"https://avatars.githubusercontent.com/u/93402883?v=4\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/users/631eac91f22a05c07ecebb7e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"631eac91f22a05c07ecebb7e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user by id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWUxMzMwNzYyODUyODMzZTk3NjQzZCIsImlhdCI6MTY2MjkxNTQyMiwiZXhwIjoxNjY1NTA3NDIyfQ.Df1WaSsb62WT-OqkKhIDhQRPEdB__SR8UjinnopB3N8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"_id\": \"631e1330762852833e97643d\",\n        \"fullName\": \"OUMAYMA BRIKI\",\n        \"email\": \"oumaymabriki.dev@gmail.com\",\n        \"isAdmin\": true,\n        \"phoneNumber\": 21628807623,\n        \"photo\": \"https://avatars.githubusercontent.com/u/93402883?v=4\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/users/631e1330762852833e97643d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"631e1330762852833e97643d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"61b0baf9dc2358d11a94c1d1\",\n    \"userName\": \"n.khaskhoussi\",\n    \"fullName\": \"Naiim Khaskhoussi\",\n    \"email\": \"nkh@gmail.com\",\n    \"role\": \"AGENT\",\n    \"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/users/62f52bcc4d7528c5563aa3b1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"62f52bcc4d7528c5563aa3b1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"oumaymabriki.dev@gmail.com\",\n    \"password\": \"admin+123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "centers",
+			"item": [
+				{
+					"name": "Get all centers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWUxMzMwNzYyODUyODMzZTk3NjQzZCIsImlhdCI6MTY2MjkxNTQyMiwiZXhwIjoxNjY1NTA3NDIyfQ.Df1WaSsb62WT-OqkKhIDhQRPEdB__SR8UjinnopB3N8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWMxYzU3YjVlOTU5OWNiY2IxMmE2ZTQiLCJyb2xlIjoiYWRtaW4iLCJmdWxsTmFtZSI6IlNlbWFoIEtoYXNraG91c3NpIiwiaWF0IjoxNjQwMTcxNjMwfQ.miya_RP9TmZSqBk_pK71XM0_00Dl_Tjy3IonjqQHJj4",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/centers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"centers"
+							],
+							"query": [
+								{
+									"key": "governorate",
+									"value": "ben arous",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "admin",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "khaskhoussi",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new center",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWUxMzMwNzYyODUyODMzZTk3NjQzZCIsImlhdCI6MTY2MjkxNTQyMiwiZXhwIjoxNjY1NTA3NDIyfQ.Df1WaSsb62WT-OqkKhIDhQRPEdB__SR8UjinnopB3N8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"centername\" : \"center 2\",\n    \"longitude\": 10,\n    \"latitude\": 2,\n    \"description\": \"a desc here\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/centers/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"centers",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get center by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/centers/631e9fb9e30c0700bf7875b0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"centers",
+								"631e9fb9e30c0700bf7875b0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update center by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWUxMzMwNzYyODUyODMzZTk3NjQzZCIsImlhdCI6MTY2MjkxNTQyMiwiZXhwIjoxNjY1NTA3NDIyfQ.Df1WaSsb62WT-OqkKhIDhQRPEdB__SR8UjinnopB3N8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"_id\": \"631e7526422a1c5ca4dfcd63\",\n        \"centername\": \"Bni Khiar\",\n        \"longitude\": 10,\n        \"latitude\": 2,\n        \"description\": \"Nabeul\",\n        \"__v\": 0\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/centers/631e7526422a1c5ca4dfcd63",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"centers",
+								"631e7526422a1c5ca4dfcd63"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete center by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"61b0baf9dc2358d11a94c1d1\",\n    \"userName\": \"n.khaskhoussi\",\n    \"fullName\": \"Naiim Khaskhoussi\",\n    \"email\": \"nkh@gmail.com\",\n    \"role\": \"AGENT\",\n    \"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/centers/62f52bcc4d7528c5563aa3b1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"centers",
+								"62f52bcc4d7528c5563aa3b1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

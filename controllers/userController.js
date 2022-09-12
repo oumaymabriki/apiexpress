@@ -130,7 +130,7 @@ exports.findOne = (req,res)=>{
   console.log(req.params.id);
   User.findOne({_id: req.params.id})
   .then(data =>{
-      res.status(200).json(data);
+      res.status(200).json(data );
   })
   .catch(err =>{
       res
