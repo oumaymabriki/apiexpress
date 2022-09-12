@@ -35,23 +35,18 @@ exports.getCenters = asyncHandler(async (req, res) => {
 });
 
 exports.updateCenters = asyncHandler(async (req, res) => {
-    const center = await Center.findById(req.center._id);
+    const center = await Center.findById(req.params.id);
   
     if (center) {
-      center.longitude = req.body.longitude|| center.longitude;
-      user.latitude = req.body.latitude || user.latitude;
+      center.centername = req.body.centername;
+      center.longitude = req.body.longitude;
+      center.latitude = req.body.latitude;
       if (req.body.description) {
         center.description = req.body.description;
       }
   
       const updatedCenter = await center.save();
-      return res.json({
-        _id: updatedCenter._id,
-        centername: updatedCenter.centername,
-        longitude: updatedCenter.longitude,
-        latitude: updatedCenter.latitude,
-        description: updatedCenter.description,
-      });
+      return res.json(updatedCenter);
     } else {
       res.status(404);
       throw new Error('Center not Found');
@@ -61,7 +56,7 @@ exports.updateCenters = asyncHandler(async (req, res) => {
 
 //@ get center for all visitors
 exports.getCenter = asyncHandler(async (req, res) => {
-    const center = await Center.findById(req.center._id);
+    const center = await Center.findById(req.params.id);
     res.json(center);
 });
 
